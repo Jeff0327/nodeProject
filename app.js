@@ -1,22 +1,11 @@
-const express = require("express");
-require("dotenv").config();
-const postRouter = require("./routers/post");
+require("./db");
 const morgan = require("morgan");
+const express = require("express");
+const postRouter = require("./routers/post");
 const app = express();
-app.use("/controllers/post.js", postRouter);
+
 app.use(morgan("dev"));
-
-const mongoose = require("mongoose");
-
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => {
-    console.log("Connected");
-  })
-  .catch((err) => {
-    console.log("err", err);
-  });
-
+app.use("/api/post", postRouter);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`port is listening on ${PORT}`);
