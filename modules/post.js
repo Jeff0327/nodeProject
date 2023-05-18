@@ -32,6 +32,7 @@ const postSchema = mongoose.Schema(
         type: String,
         required: true,
         trim: true,
+        unique: true,
       },
       public_id: {
         type: String,
